@@ -15,6 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
         <Button Name="ProdListBtn" Height="35" Click="ProdListBtn_OnClick">Show Products</Button>
         <ListView
             Name="ProdList"
@@ -28,8 +29,8 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Name="AddBtn" Click="AddBtn_OnClick" >Add product</Button>
-            <Button Grid.Column="1"  Name="DeleteBtn" Click="DeleteBtn_OnClick" >Delete product</Button>
+            <Button Name="AddBtn" Click="AddBtn_OnClick" Margin="0,-50,0,50" >Add product</Button>
+            <Button Grid.Column="1"  Name="DeleteBtn" Click="DeleteBtn_OnClick" Margin="0,-50,0,50" >Delete product</Button>
         </Grid>
     </Grid>
 </UserControl>

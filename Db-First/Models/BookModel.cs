@@ -5,7 +5,7 @@ namespace Labb2_DbFirst_Template.Handlers;
 
 public class BookModel
 {
-    public List<BookTbl> Books { get; set; } 
+    //public List<BookTbl> BookTbl { get; set; } 
 
     public string Isbn13 { get; set; } 
 
@@ -15,9 +15,9 @@ public class BookModel
 
     public string Language { get; set; } = string.Empty;
 
-    public int PublicationYear { get; set; } 
+    public int PublicationYear { get; set; }
 
-    public double PriceKr { get; set; }
+    public int PriceKr { get; set; }
 
     public List<ShopModel> ShopsId { get; set; } = new();
 

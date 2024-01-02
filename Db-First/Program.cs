@@ -5,13 +5,13 @@ using Labb2_DbFirst_Template;
 using Labb2_DbFirst_Template.Entities;
     
 
-Console.WriteLine("Hello, World!");
+//Console.WriteLine("Hello, World!");
 
-//var db = new BooksContext();
+var db = new BooksContext();
 
-//var books = db.BooksTbls.ToList();
+var books = db.BooksTbls.ToList();
 
-//foreach (var book in books)
-//{
-//    Console.WriteLine(book.Title);
-//}
+foreach (var book in books)
+{
+    Console.WriteLine(book.Title);
+}

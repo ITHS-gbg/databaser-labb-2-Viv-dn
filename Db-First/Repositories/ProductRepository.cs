@@ -9,14 +9,14 @@ namespace Labb2_DbFirst_Template.Services;
 public class ProductRepository
 {
     private readonly BooksContext _context;
-    
+   
     //public List<BookModel> BookTbls { get; set; } = GlobalContext.Db.BookTbls.ToList();
     public ProductRepository(BooksContext context)
     {
         _context = context;
     }
 
-    public List<BookTbl> Books { get; set; } 
+    public List<BookTbl> Books { get; set; }
 
     public List<BookModel> GetAllProducts()
     {
@@ -35,8 +35,7 @@ public class ProductRepository
 
     public BookModel GetByIsbn13(string isbn)
     {
-
-        var book = _context.BooksTbls.Find(isbn);
+        var book = _context.BooksTbls.FirstOrDefault(i => i.Isbn13 == isbn);
         return new BookModel()
         {
             Isbn13 = book.Isbn13,
@@ -55,11 +54,10 @@ public class ProductRepository
             {
                 Title = book.Title,
                 Isbn13 = book.Isbn13,
-                //Language = book.Language,
-                //PublicationYear = book.PublicationYear,
-                //PriceKr = (double)book.PriceKr,
-                AuthorId = book.AuthorId
-
+                Language = book.Language,
+                PublicationYear = book.PublicationYear,
+                PriceKr = book.PriceKr,
+                //AuthorId = book.AuthorId
             });
         _context.SaveChanges();
     }
@@ -86,6 +84,5 @@ public class ProductRepository
         _context.InventoryTbls.Remove(book);
         _context.SaveChanges();
     }
-
 
 }

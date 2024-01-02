@@ -20,7 +20,7 @@ public partial class BookTbl
 
     public int PublicationYear { get; set; }
 
-    public double? PriceKr { get; set; }
+    public int? PriceKr { get; set; }
 
     public virtual AuthorTbl? Author { get; set; } 
 

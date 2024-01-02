@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Labb2_DbFirst_Template.Entities;
+using Labb2_DbFirst_Template.Handlers;
 
 namespace BookStore.Views
 {
@@ -26,21 +27,46 @@ namespace BookStore.Views
 
         public StoreWindowContext StoreWindowContext { get; set; } = new();
 
+        public SharedViewModel SharedViewModel { get; set; }
+
+        public SharedWindowContext SharedWindowContext { get; set; }
+
         public StoreView()
         {
             InitializeComponent();
 
             _shopRepository = new ShopRepository(AppContextManager.Context);
+            this.DataContext = SharedViewModel;
         }
-
     
         private void StoreList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (StoreList.SelectedItem is Inventory selectedItem)
-            {
-                StoreWindowContext.Title = selectedItem.Isbn13Id;
-                StoreWindowContext.Stock = selectedItem.InStock;
-            }
+
+
+            //var shop = _shopRepository.GetShopById(1);
+            //var shop2 = _shopRepository.GetShopById(2);
+            //if (shop is null)
+            //{
+            //    return;
+            //}
+            //else
+            //{
+            //    foreach (var book in Inv )
+            //    {
+            //        StoreList.Items.Add(book);
+            //    }
+            //}
+
+            //if (StoreList.SelectedItem is Inventory selectedItem)
+            //{
+            //    StoreWindowContext.Title = selectedItem.Isbn13Id;
+            //    StoreWindowContext.Stock = selectedItem.InStock;
+            //}
+        }
+
+        public string GetSelectedId()
+        {
+            return SharedViewModel.SelectedId;
         }
 
 

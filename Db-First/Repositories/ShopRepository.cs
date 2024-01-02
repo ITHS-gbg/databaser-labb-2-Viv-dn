@@ -53,7 +53,6 @@ public class ShopRepository
 
     public void AddBookToStore(string isbn13, int shopsId)
     {
-
         var book = _context.InventoryTbls.FirstOrDefault(p => p.Isbn13Id == isbn13);
         //var shop = _context.InventoryTbls.Single(s => s.ShopId == shopsId);
         var shop = GetShopById;

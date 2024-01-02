@@ -26,33 +26,57 @@ namespace BookStore
 
         public WindowContext WindowContext { get; set; }
 
+        public SharedViewModel SharedViewModel { get; set; }
+
         public ProductView()
         {
-                InitializeComponent();
+            InitializeComponent();
 
             _productRepository = new ProductRepository(AppContextManager.Context);
+
+            SharedViewModel = new SharedViewModel();
 
         }
 
         private void ProdListBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            var products = _productRepository.GetAllProducts();
+            //var products = _productRepository.GetAllProducts();
+            List<BookModel> books = _productRepository.GetAllProducts();
             ProdList.Items.Clear();
 
-            foreach (var bookModel in products)
+            if (books is null)
             {
-                ProdList.Items.Add(products);
+                BookModel book = new BookModel();
+                book.AuthorId = 3;
+                book.Isbn13 = "12345678";
+                book.Title = "Hej";
+                ProdList.Items.Add(book);
             }
+            else
+            {
+                foreach (var bookTbl in books)
+                {
+                    ProdList.Items.Add(bookTbl);
+                }
+            }
+
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            if (ProdList.SelectedItem is BookModel selectedItem)
+
+            if (ProdList.SelectedItem is List<BookModel> selectedItem)
             {
-                var selectedProd = WindowContext.Products.FirstOrDefault(b => b.Title == selectedItem.Title);
+                //var selectedProd = WindowContext.Products.FirstOrDefault(b => b.Title == selectedItem.Title);
+                var selectedProd = selectedItem.FirstOrDefault();
                 if (selectedProd is null)
                 {
                     return;
+                }
+                else
+                {
+                    SharedViewModel.SelectedId = selectedProd.Isbn13;
+                    _productRepository.AddProduct(selectedProd);
                 }
             }
             //else if (StoreList.SelectedItem is BookModel selectedIem)
